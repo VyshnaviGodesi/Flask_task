@@ -1,0 +1,96 @@
+    
+<html>
+<title> Service Now</title>
+<head>
+<style>
+table {
+  width:100%;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+table tr:nth-child(even) {
+  background-color: #eee;
+}
+table tr:nth-child(odd) {
+ background-color: #fff;
+}
+table th {
+  background-color: black;
+  color: white;
+}
+</style>
+<h1>Incidents</h1>
+</head>
+<body>
+<table>
+<tr>
+    <th>Number</th>
+    <th>dv_category</th> 
+    <th>u_cause_code</th>
+    <th>dv_impact</th>
+    <th>dv_opened_by</th> 
+    <th>dv_assignment_group</th>
+    <th>dv_incident_state</th>
+    <th>dv_closed_by</th>
+    <th>sys_created_on</th> 
+  </tr>
+{% for item in data %}
+<tr>
+    {% for i in range(0,item| length) %}
+	  {% if i == 0 %}
+		{% with var1="https://fti.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=" %}    
+		{% with var2=item[i]%}     
+		<td><a href="{{var1+var2}}">{{var2}}</a></td>
+		{% endwith %}
+		{% endwith %}
+	  {% else %}
+		<td>{{item[i]}}</td>
+	  {% endif %}
+    {% endfor %}
+    
+</tr>
+{% endfor %}
+</table>
+
+<h1>Changes</h1>
+<table>
+<tr>
+    <th>Chg_num</th>
+    <th>StartDate</th> 
+    <th>ConfigItem</th>
+    <th>Description</th>
+    <th>Chg_assigned_to</th> 
+    <th>chg_req.dv_approval</th>
+    <th>Priority</th>
+    <th>Risk</th> 
+    <th>Chg_drg</th>
+  </tr>
+{% for item in data2 %}
+<tr>
+    {% for i in range(0,item| length) %}
+	  {% if i == 0 %}
+		{% with var1="https://fti.service-now.com/nav_to.do?uri=change_request.do?sysparm_query=number=" %}    
+		{% with var2=item[i]%}     
+		<td><a href="{{var1+var2}}">{{var2}}</a></td>
+		{% endwith %}
+		{% endwith %}
+	  {% else %}
+		<td>{{item[i]}}</td>
+	  {% endif %}
+    {% endfor %}
+    
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>    
+
+
+
+
